@@ -1,0 +1,22 @@
+language: python
+
+matrix:
+  include:
+
+    - python: 3.5
+
+virtualenv:
+  system_site_packages: true
+
+services:
+  - docker
+
+before_script: 
+  - pip install docker-compose
+
+script:
+  - docker-compose run web python  borrowDomain/manage.py 
+  - bash build.sh
+  - bash docker_push
+
+  
