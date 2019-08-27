@@ -2,7 +2,9 @@ from django.db import models
 
 # Create your models here.
 class Borrow(models.Model):
-    titulo = models.CharField(max_length= 50)
+    id_prestamista = models.IntegerField()
+    id_solicitante = models.IntegerField()
+    fecha_inicio = models.DateField()
+    fecha_termino = models.DateField()
 
-    def __str__(self):
-        return self.titulo
+

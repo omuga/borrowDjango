@@ -4,4 +4,4 @@ from .models import Borrow
 class BorrowSerializer(serializers.ModelSerializer):
     class Meta:
         model =  Borrow
-        fields = ("id","titulo")
+        fields = ("id","id_prestamista","id_solicitante","fecha_inicio","fecha_termino")
