@@ -15,7 +15,7 @@ before_script:
   - pip install docker-compose
 
 script:
-  - docker-compose run web python  borrowDomain/manage.py makemigrations --noinput
+  - docker-compose run web python  yes | borrowDomain/manage.py makemigrations 
   - docker-compose run web python  borrowDomain/manage.py migrate
   - bash build.sh
   - bash docker_push
