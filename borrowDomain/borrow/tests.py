@@ -17,9 +17,11 @@ class BorrowTestCase(TestCase):
         
     
     def create_borrow_object(self):
-        borrow = Borrow(1000,1000,datetime.date.today(),datetime.date(2030,12,5))
-        Borrow.save(borrow)
+        fecha_ini = datetime.date.today() 
+        fecha_fin = datetime.date(2025,12, 3)
+        b1 = Borrow.objects.create(id_solicitante = 1000,id_prestamista = 1001, fecha_inicio = fecha_ini, fecha_termino = fecha_fin )
+        Borrow.save(b1)
         borrow_db = Borrow.objects.get(id_prestamista = 1000)
-        self.assertEqual(borrow,borrow_db)
+        self.assertEqual(b1,borrow_db)
 
 
