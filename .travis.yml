@@ -2,7 +2,6 @@ language: python
 
 matrix:
   include:
-
     - python: 3.5
 
 virtualenv:
@@ -12,30 +11,8 @@ services:
   - docker
 
 before_script: 
-  - pip install docker-compose~=1.23.0  
-  
-stages:
-  - unit test
-  - zap owasp
-  - deploy dockerhub
-  
-jobs:
-  include:
-  - stage: unit test
-    script: bash build.sh
-  - stage: zap owasp
-    script:
-     - docker build -t omuga/bmborrowedjango_web .
-     - docker run -d --name bmborrowed -t omuga/bmborrowedjango_web
-     - sleep 15
-    after_script:
-       - docker run --name owasp --link bmborrowed -t owasp/zap2docker-weekly zap-full-scan.py -t http://bmborrowed:PORT
-  - stage: deploy dockerhub
-    script: 
-     - docker pull $DOCKER_USERNAME/bmborrowdjango_web
-     - docker tag bmborrowdjango_web $DOCKER_USERNAME/bmborrowdjango_web
-     - docker push $DOCKER_USERNAME/bmborrowdjango_web 
+  - pip install docker-compose
 
-before_install:
-#Docker login
- - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+script:
+  - bash build.sh
+  - bash docker_push
