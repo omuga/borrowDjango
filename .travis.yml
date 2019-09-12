@@ -20,7 +20,7 @@ script:
 
 after_script:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker build -t omuga/bmborrowdjango_web .  
-  - docker run -d --name bmborrowed -t omuga/bmborrowdjango_web
+  - docker build -t letzshae/bmborrowdjango_web .  
+  - docker run -d --name bmborrowed -t letzshake/bmborrowdjango_web
   - sleep 15
   - docker run --name owasp --link bmborrowed -t owasp/zap2docker-weekly zap-full-scan.py -t http://bmborrowed:8001
