@@ -1,4 +1,0 @@
-#!/bin/bash
-docker pull $DOCKER_USERNAME/bmborrowdjango_web
-docker tag bmborrowdjango_web $DOCKER_USERNAME/bmborrowdjango_web
-docker push $DOCKER_USERNAME/bmborrowdjango_web 
