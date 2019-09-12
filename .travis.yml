@@ -23,4 +23,4 @@ after_script:
   - docker build -t omuga/bmborrowedjango_web .
   - docker run -d --name bmborrowed -t omuga/bmborrowedjango_web
   - sleep 15
-  - docker run --name owasp --link bmborrowed -t owasp/zap2docker-weekly zap-full-scan.py -t http://localhost:8001
+  - docker run --name owasp --link bmborrowed -t owasp/zap2docker-weekly zap-full-scan.py -t http://localhost:8000
