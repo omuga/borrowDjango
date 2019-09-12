@@ -13,14 +13,23 @@ services:
 
 before_script: 
   - pip install docker-compose  
+  
 stages:
   - unit test
+  - zap owasp
   - deploy dockerhub
   
 jobs:
   include:
   - stage: unit test
     script: bash build.sh
+  - stage: zap owasp
+    script:
+     - docker build -t omuga/bmborrowedjango_web .
+     - docker run -d --name bmborrowed -t omuga/bmborrowedjango_web
+     - sleep 15
+    after_script:
+       - docker run --name owasp --link bmborrowed -t owasp/zap2docker-weekly zap-full-scan.py -t http://bmborrowed:PORT
   - stage: deploy dockerhub
     script: 
      - docker pull $DOCKER_USERNAME/bmborrowdjango_web
@@ -30,4 +39,3 @@ jobs:
 before_install:
 #Docker login
  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-
