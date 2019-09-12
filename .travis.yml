@@ -17,5 +17,6 @@ before_script:
 script:
   - bash build.sh
   - bash docker_push
+  - bash owasp.sh
 
   
