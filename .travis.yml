@@ -17,7 +17,10 @@ before_script:
 script:
   - bash build.sh
   - bash docker_push
-  - bash owasp.sh
 
 after_script:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker build -t omuga/bmborrowedjango_web .
+  - docker run -d --name bmborrowed -t omuga/bmborrowedjango_web
+  - sleep 15
   - docker run --name owasp --link bmborrowed -t owasp/zap2docker-weekly zap-full-scan.py -t http://bmborrowed:8001
