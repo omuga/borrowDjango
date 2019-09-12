@@ -14,8 +14,20 @@ services:
 before_script: 
   - pip install docker-compose
 
-script:
-  - bash build.sh
-  - bash docker_push
-
+stages:
+  - unit test
+  - deploy dockerhub
   
+
+jobs:
+  include:
+  - stage: unit test
+   script: bash build.sh
+  - stage: deploy dockerhub
+  script: bash docker_push
+  - docker pull $DOCKER_USERNAME/bmborrowdjango_web
+  - docker tag bmborrowdjango_web $DOCKER_USERNAME/bmborrowdjango_web
+  - docker push $DOCKER_USERNAME/bmborrowdjango_web
+
+before_install:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
