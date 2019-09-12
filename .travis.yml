@@ -11,8 +11,8 @@ virtualenv:
 services:
   - docker
 
-before_script: 
-  - pip install docker-compose  
+#before_script: 
+#  - pip install docker-compose  
   
 stages:
   - unit test
