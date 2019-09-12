@@ -7,4 +7,14 @@ services:
       - .:/code
     ports: 
       - "8001:8001"
-    
+
+stages:
+  - unit test
+  - deploy dockerhub
+
+jobs:
+  include:
+  - stage: unit test
+   script: bash build.sh
+  - stage: deploy dockerhub
+  script: bash docker_push
