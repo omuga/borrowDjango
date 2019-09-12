@@ -7,8 +7,7 @@ services:
       - .:/code
     ports: 
       - "8001:8001"
-before install:
-  echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
 
 stages:
   - unit test
@@ -20,6 +19,7 @@ jobs:
    script: bash build.sh
   - stage: deploy dockerhub
   script:
+   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin 
     - docker pull $DOCKER_USERNAME/bmborrowdjango_web
     - docker tag bmborrowdjango_web $DOCKER_USERNAME/bmborrowdjango_web
     - docker push $DOCKER_USERNAME/bmborrowdjango_web 
