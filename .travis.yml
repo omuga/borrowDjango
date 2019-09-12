@@ -18,9 +18,11 @@ script:
   - bash build.sh
   - bash docker_push
 
-#after_script:
-#  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-#  - docker build -t letzshae/bmborrowdjango_web .  
-#  - docker run -d --name bmborrowed -t letzshake/bmborrowdjango_web
-#  - sleep 15
-#  - docker run --name owasp --link bmborrowed -t owasp/zap2docker-weekly zap-full-scan.py -t http://bmborrowed:8001
+after_script:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  #- docker build -t letzshae/bmborrowdjango_web .  
+  #- docker run -d --name bmborrowed -t letzshake/bmborrowdjango_web
+  - docker-compose build
+  - docker-compose up
+  - sleep 15
+  - docker run --name owasp --link bmborrowed -t owasp/zap2docker-weekly zap-full-scan.py -t http://bmborrowed:8001
