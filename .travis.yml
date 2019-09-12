@@ -21,11 +21,11 @@ stages:
 jobs:
   include:
   - stage: settings
-  script:   pip install docker-compose
+    script:   pip install docker-compose
   - stage: unit test
-  script: bash build.sh
+    script: bash build.sh
   - stage: deploy dockerhub
-  script: 
+    script: 
   - docker pull $DOCKER_USERNAME/bmborrowdjango_web
   - docker tag bmborrowdjango_web $DOCKER_USERNAME/bmborrowdjango_web
   - docker push $DOCKER_USERNAME/bmborrowdjango_web
