@@ -6,13 +6,13 @@ matrix:
     - python: 3.5
 
 virtualenv:
-  system_site_packages: true
+  system_site_packages: false
 
 services:
   - docker
 
-#before_script: 
-#  - pip install docker-compose  
+before_script: 
+  - pip install docker-compose  
   
 stages:
   - unit test
