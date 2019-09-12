@@ -14,3 +14,12 @@ class BorrowTestCase(TestCase):
     def test_borrow_are_valid_instance(self):
         borrows_test = self.setUp()
         self.assertTrue(isinstance(borrows_test,Borrow))
+        
+    
+    def create_borrow_object(self):
+        borrow = Borrow(1000,1000,datetime.date.today(),datetime.date(2030,12,5))
+        Borrow.save(borrow)
+        borrow_db = Borrow.objects.get(id_prestamista = 1000)
+        self.assertEqual(borrow,borrow_db)
+
+
