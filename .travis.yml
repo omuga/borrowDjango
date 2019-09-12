@@ -25,10 +25,10 @@ jobs:
   - stage: unit test
    script: bash build.sh
   - stage: deploy dockerhub
-  script: 
-  - docker pull $DOCKER_USERNAME/bmborrowdjango_web
-  - docker tag bmborrowdjango_web $DOCKER_USERNAME/bmborrowdjango_web
-  - docker push $DOCKER_USERNAME/bmborrowdjango_web
+   script: 
+    - docker pull $DOCKER_USERNAME/bmborrowdjango_web
+    - docker tag bmborrowdjango_web $DOCKER_USERNAME/bmborrowdjango_web
+    - docker push $DOCKER_USERNAME/bmborrowdjango_web
 
 before_install:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
