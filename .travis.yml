@@ -11,16 +11,17 @@ virtualenv:
 services:
   - docker
 
-before_script: 
-  - pip install docker-compose
 
 stages:
+  - settings
   - unit test
   - deploy dockerhub
   
 
 jobs:
   include:
+  - stage: settings
+  script:   pip install docker-compose
   - stage: unit test
    script: bash build.sh
   - stage: deploy dockerhub
