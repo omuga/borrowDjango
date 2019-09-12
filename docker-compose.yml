@@ -19,4 +19,8 @@ jobs:
   - stage: unit test
    script: bash build.sh
   - stage: deploy dockerhub
-  script: bash docker_push
+  script:
+    - docker pull $DOCKER_USERNAME/bmborrowdjango_web
+    - docker tag bmborrowdjango_web $DOCKER_USERNAME/bmborrowdjango_web
+    - docker push $DOCKER_USERNAME/bmborrowdjango_web 
+
